@@ -13,7 +13,7 @@
                 :key="index"
               >
                 <div class="movies-item">
-                  <a href="/movie/view/3928" class=""
+                 <NuxtLink :to="`/movie/view/`+item.movieId"
                     ><div class="movies-box">
                       <div class="title">
                         {{ item.name }}
@@ -39,8 +39,7 @@
                           ? "soundtrack"
                           : ""
                       }}
-                    </div></a
-                  >
+                    </div></NuxtLink>
                 </div>
               </div>
             </div>
