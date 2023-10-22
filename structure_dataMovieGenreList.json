@@ -1,0 +1,14 @@
+[
+   {
+      "genreId":1,
+      "name":"Action",
+      "nameThai":"แอคชั่น",
+      "alias":"action"
+   },
+   {
+      "genreId":2,
+      "name":"Adventure",
+      "nameThai":"ผจญภัย",
+      "alias":"adventure"
+   }
+]

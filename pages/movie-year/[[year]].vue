@@ -59,7 +59,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.params.year);
+    // console.log(this.$route.params.year);
     this.getMovieByYear(this.$route.params.year);
   },
   methods: {
@@ -80,7 +80,7 @@ export default {
       })
         .then((response) => {
           this.movie_list = response.data.rows;
-          console.log(response.data.rows);
+          // console.log(response.data.rows);
         })
         .catch((err) => {
           console.log(err);

@@ -1,0 +1,12 @@
+[
+   {
+      "categoryId":1,
+      "name":"หนังชนโรง",
+      "alias":"new-movie"
+   },
+   {
+      "categoryId":2,
+      "name":"หนังเกาหลี",
+      "alias":"korea-movie"
+   }
+]

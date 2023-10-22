@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
     <Header />
     <Navbar />
     <Content />
@@ -73,7 +76,6 @@
         </div>
       </div>
     </div>
-
     <Footer />
   </div>
 </template>
@@ -83,13 +85,17 @@ import Header from "@/components/Header.vue";
 import Navbar from "@/components/Navbar.vue";
 import Content from "@/components/Content.vue";
 import Footer from "@/components/Footer.vue";
+// const config = useRuntimeConfig();
 export default {
   components: {
     Header,
     Footer,
+    Navbar,
+    Content,
   },
   data() {
     return {
+      title: ".....",
       year: [],
       movieGenre: {
         status: 1,
@@ -484,6 +490,7 @@ export default {
     };
   },
   mounted() {
+
     // loop create year 1978 to current year order desc
     for (let i = new Date().getFullYear(); i >= 1978; i--) {
       this.year.push(i);

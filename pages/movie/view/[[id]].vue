@@ -1,5 +1,8 @@
 <template>
   <div>
+  <Head>
+      <Title>{{ title }} 0000 </Title>
+    </Head>
     <div class="content-wrapper">
       <div class="movies-wrapper">
         <div class="movies-header">{{ MovieDetail.name }}</div>
@@ -81,7 +84,6 @@
           </div>
         </div>
       </div>
-    
       <div class="movies-wrapper">
         <div class="movies-header">หนังอื่นๆ น่าสนใจ</div>
         <div class="movies-content">
@@ -95,9 +97,7 @@
                 <div class="movies-item">
                   <NuxtLink :to="`/movie/view/` + item.movieId"
                     ><div class="movies-box">
-                      <div class="title">
-                        {{ item.name }} {{ index }}
-                      </div>
+                      <div class="title">{{ item.name }} {{ index }}</div>
                       <div class="ribbon mfull-hd">HD</div>
                       <div class="ribbon mzoom" style="display: none">Zoom</div>
                       <div class="poster">
@@ -110,11 +110,11 @@
                     </div>
                     <div class="movies-footer">
                       {{
-                        item.soundThai && item.soundTrack
+                        soundThai && soundTrack
                           ? "เสียงไทย + soundtrack"
-                          : item.soundThai
+                          : soundThai
                           ? "เสียงไทย"
-                          : item.soundTrack
+                          : soundTrack
                           ? "soundtrack"
                           : ""
                       }}
@@ -132,21 +132,28 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
       MovieId: "",
       MovieName: "",
-      MovieDetail: {},
+      MovieDetail: {
+        name: "",
+        nameThai: "",
+        coverImagePath: "",
+        trailer: "",
+      },
       MoviePlayer: [],
       relatedMovies: [],
       soundThai: false,
       soundTrack: false,
+      title: `%s | ${this.$config.public.title}`,
     };
   },
-  mounted() {
+  async mounted() {
     this.MovieId = this.$route.params.id;
-    this.getMovieByID(this.MovieId);
+    await this.getMovieByID(this.MovieId);
   },
   methods: {
     async getMovieByID(MovieId = 1) {
@@ -162,12 +169,12 @@ export default {
         data: payload,
       })
         .then((response) => {
-          this.MovieNmae = response.data.movie.name;
-          this.relatedMovies = response.data.relatedMovies.slice(0, 8);
+          this.MovieName = response.data?.movie?.name;
+          this.relatedMovies = response.data?.relatedMovies?.slice(0, 8);
           this.MovieDetail = response.data.movie;
-          this.soundThai = response.data.movie.soundThai;
-          this.soundTrack = response.data.movie.soundTrack;
-          this.MoviePlayer = response.data.videos;
+          this.soundThai = response.data?.movie?.soundThai;
+          this.soundTrack = response.data?.movie?.soundTrack;
+          this.MoviePlayer = response.data?.videos;
           console.log(response.data);
           //   console.log(this.MoviePlayer[0].videoPath);
         })
