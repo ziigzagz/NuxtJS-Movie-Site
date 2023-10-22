@@ -5,19 +5,19 @@
     <Content />
     <div class="container">
       <div class="form-row">
-        <div class="col-lg-2 col-12 d-none d-md-block">
+        <div class="col-lg-2 col-12 d-none d-lg-block">
           <div class="side-bar">
             <div class="side-bar-header">ปีที่ฉาย</div>
             <div class="side-bar-content">
               <div class="menu-items year">
-                <a
-                  class="item"
+                <NuxtLink
+                  class="item text-center"
                   v-for="i in year"
                   :key="i"
-                  :href="/movie-year/ + i"
+                  :to="/movie-year/ + i"
                 >
                   {{ i }}
-                </a>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -30,11 +30,11 @@
             <div class="side-bar-header">ประเภทหนัง</div>
             <div class="side-bar-content">
               <div class="menu-items">
-                <a
-                  class="item"
+                <NuxtLink
+                  class="item text-center"
                   v-for="(item, index) in movieGenre.rows"
                   :key="index"
-                  :href="
+                  :to="
                     /movie-genre/ +
                     item.genreId +
                     `/` +
@@ -44,20 +44,20 @@
                   "
                 >
                   {{ item.name }} {{ item.nameThai }}
-                </a>
+                </NuxtLink>
               </div>
             </div>
           </div>
           <div class="side-bar mt-3">
-            <div class="side-bar-header">ประเภทหนัง</div>
+            <div class="side-bar-header">หมวดหมู่</div>
             <div class="side-bar-content">
               <div class="menu-items">
-                <a
-                  class="item"
-                  v-for="(item, index) in movieGenre.rows"
+                <NuxtLink
+                  class="item text-center"
+                  v-for="(item, index) in movieCategory.rows"
                   :key="index"
-                  :href="
-                    /movie-genre/ +
+                  :to="
+                    /movie-category/ +
                     item.categoryId +
                     `/` +
                     item.alias +
@@ -66,7 +66,7 @@
                   "
                 >
                   {{ item.name }}
-                </a>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -493,54 +493,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -5px;
-  margin-left: -5px;
-}
-.side-bar .side-bar-header {
-  padding: 7px;
-  font-size: 1.1rem;
-  font-weight: 400;
-  text-align: center;
-  color: #fff;
-  background: #141414;
-  border: 2px solid #333;
-  border-bottom: 0;
-}
-.side-bar .side-bar-content {
-  border: 1px solid #333;
-}
-.side-bar .side-bar-content .menu-items {
-  width: 100%;
-}
-.side-bar .side-bar-content .menu-items.year .item {
-  display: inline-block;
-  padding: 0.5rem;
-  width: 50%;
-  font-size: 0.9rem;
-  color: #bdbd8c;
-  background: #1d2729;
-  border: 1px solid #333;
-  text-decoration: none;
-  transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-}
-.side-bar .side-bar-content .menu-items .item {
-  display: inline-block;
-  padding: 0.5rem;
-  width: 100%;
-  font-size: 0.9rem;
-  color: #bdbd8c;
-  background: #1d2729;
-  border: 1px solid #333;
-  text-decoration: none;
-  transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-}
 </style>

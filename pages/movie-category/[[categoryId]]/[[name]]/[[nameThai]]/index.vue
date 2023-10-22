@@ -52,8 +52,6 @@
 </template>
 
 <script>
-import Page1 from "@/components/Page1.vue";
-import Page2 from "@/components/Page2.vue";
 import axios from "axios";
 export default {
   data() {
@@ -62,21 +60,21 @@ export default {
     };
   },
   mounted() {
-    this.getMovieHome();
+    console.log(this.$route.params);
+    this.getMovieByGenre(this.$route.params.categoryId);
   },
-
   methods: {
-    getMovieHome() {
+    async getMovieByGenre(categoryId = 1) {
       let payload = {
         url: "https://service.server-cdn-streaming.com/api/web/movie-list",
         method: "GET",
         params: {
-          genreId: "3",
+          categoryId: categoryId,
           offset: 0,
           limit: 20,
         },
       };
-      axios({
+      await axios({
         url: "https://api.xn--72czp5e5a8b.xyz/",
         method: "POST",
         data: payload,
@@ -89,10 +87,6 @@ export default {
           console.log(err);
         });
     },
-  },
-  components: {
-    Page1,
-    Page2,
   },
 };
 </script>
