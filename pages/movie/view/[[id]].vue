@@ -1,6 +1,6 @@
 <template>
   <div>
-  <Head>
+    <Head>
       <Title>{{ title }} 0000 </Title>
     </Head>
     <div class="content-wrapper">
@@ -62,11 +62,11 @@
             <div class="row mt-3">
               <div class="col">
                 <div class="movies-player">
-                  <iframe
+                  <!-- <iframe
                     class="img-fluid i-frame"
                     :src="this.MoviePlayer[0]?.videoPath + `?web=1`"
                     allowfullscreen="allowfullscreen"
-                  ></iframe>
+                  ></iframe> -->
                 </div>
               </div>
             </div>
@@ -155,8 +155,11 @@ export default {
     this.MovieId = this.$route.params.id;
     await this.getMovieByID(this.MovieId);
   },
+
+  
   methods: {
     async getMovieByID(MovieId = 1) {
+        
       let payload = {
         url:
           "https://service.server-cdn-streaming.com/api/web/movie/" + MovieId,
@@ -169,14 +172,14 @@ export default {
         data: payload,
       })
         .then((response) => {
+        //   return response.data;
           this.MovieName = response.data?.movie?.name;
-          this.relatedMovies = response.data?.relatedMovies?.slice(0, 8);
-          this.MovieDetail = response.data.movie;
-          this.soundThai = response.data?.movie?.soundThai;
-          this.soundTrack = response.data?.movie?.soundTrack;
-          this.MoviePlayer = response.data?.videos;
-          console.log(response.data);
-          //   console.log(this.MoviePlayer[0].videoPath);
+        //   this.relatedMovies = response.data?.relatedMovies?.slice(0, 8);
+        //   this.MovieDetail = response.data.movie;
+        //   this.soundThai = response.data?.movie?.soundThai;
+        //   this.soundTrack = response.data?.movie?.soundTrack;
+        //   this.MoviePlayer = response.data?.videos;
+          console.log("data ==>", response);
         })
         .catch((err) => {
           console.log(err);

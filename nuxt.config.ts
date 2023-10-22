@@ -44,6 +44,6 @@ export default defineNuxtConfig({
     // { src: '@/plugins/vue-bootstrap-typeahead.js', ssr: false },
     { src: '@/plugins/jquery.js', ssr: false, mode: 'server' },
     { src: '@/plugins/axios.js', ssr: false, mode: 'server' },
-    { src: '@/plugins/test.js', ssr: false, mode: 'server' },
+    // { src: '@/plugins/test.js', ssr: false, mode: 'server' },
   ],
 });

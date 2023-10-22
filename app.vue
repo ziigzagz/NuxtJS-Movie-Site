@@ -490,7 +490,6 @@ export default {
     };
   },
   mounted() {
-
     // loop create year 1978 to current year order desc
     for (let i = new Date().getFullYear(); i >= 1978; i--) {
       this.year.push(i);
