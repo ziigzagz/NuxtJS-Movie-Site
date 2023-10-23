@@ -20,7 +20,9 @@
                 <iframe
                   width="100%"
                   height="100%"
-                  :src="MovieDetail.trailer"
+                  :src="
+                    `https://www.youtube.com/embed/` + MovieDetail.youtubeId
+                  "
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -34,10 +36,17 @@
 
       <div class="movies-wrapper">
         <div class="movies-header text-start">
-          เรื่องย่อ : {{ MovieDetail.nameThai }}
+          เรื่องย่อ : {{ MovieDetail.name }}
         </div>
         <div class="movies-content">
-          <div class="container">
+          <div class="container text-white">
+            <div class="row">
+              <div class="col description">
+                <p>
+                  {{ MovieDetail.description }}
+                </p>
+              </div>
+            </div>
             <div class="row">
               <div class="col text-center">
                 <NuxtLink to="/">ดูหนังออนไลน์</NuxtLink>
@@ -62,11 +71,12 @@
             <div class="row mt-3">
               <div class="col">
                 <div class="movies-player">
-                  <!-- <iframe
+                  <iframe
                     class="img-fluid i-frame"
-                    :src="this.MoviePlayer[0]?.videoPath + `?web=1`"
-                    allowfullscreen="allowfullscreen"
-                  ></iframe> -->
+                    :src="MovieDetail.linkPlayer"
+                   frameborder="0" allowfullscreen=""
+                   scrolling="no" 
+                  ></iframe>
                 </div>
               </div>
             </div>
@@ -138,53 +148,30 @@ export default {
     return {
       MovieId: "",
       MovieName: "",
-      MovieDetail: {
-        name: "",
-        nameThai: "",
-        coverImagePath: "",
-        trailer: "",
-      },
+      MovieDetail: {},
       MoviePlayer: [],
       relatedMovies: [],
-      soundThai: false,
-      soundTrack: false,
       title: `%s | ${this.$config.public.title}`,
     };
   },
   async mounted() {
     this.MovieId = this.$route.params.id;
     await this.getMovieByID(this.MovieId);
+    await this.getrelatedMovies();
   },
-
-  
   methods: {
     async getMovieByID(MovieId = 1) {
-        
-      let payload = {
-        url:
-          "https://service.server-cdn-streaming.com/api/web/movie/" + MovieId,
-        method: "GET",
-        params: {},
-      };
-      await axios({
-        url: "https://api.xn--72czp5e5a8b.xyz/",
-        method: "POST",
-        data: payload,
-      })
-        .then((response) => {
-        //   return response.data;
-          this.MovieName = response.data?.movie?.name;
-        //   this.relatedMovies = response.data?.relatedMovies?.slice(0, 8);
-        //   this.MovieDetail = response.data.movie;
-        //   this.soundThai = response.data?.movie?.soundThai;
-        //   this.soundTrack = response.data?.movie?.soundTrack;
-        //   this.MoviePlayer = response.data?.videos;
-          console.log("data ==>", response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      let url = `${this.$config.public.api}/movieById/${MovieId}`;
+      let res = await axios.get(url);
+      this.MovieDetail = res.data?.data[0];
+      console.log(this.MovieDetail);
     },
+    async getrelatedMovies(){
+      let url = `${this.$config.public.api}/movieRandom`;
+      let res = await axios.get(url);
+      this.relatedMovies = res.data?.data;
+      console.log(this.relatedMovies);
+    }
   },
 };
 </script>
@@ -216,6 +203,6 @@ a:hover {
 }
 .i-frame {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 14/9;
 }
 </style>

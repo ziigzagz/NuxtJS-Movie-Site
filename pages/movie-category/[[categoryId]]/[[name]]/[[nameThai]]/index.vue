@@ -30,19 +30,19 @@
                       </div>
                     </div>
                     <div class="movies-footer">
-                      {{
-                        item.soundThai && item.soundTrack
-                          ? "เสียงไทย + soundtrack"
-                          : item.soundThai
-                          ? "เสียงไทย"
-                          : item.soundTrack
-                          ? "soundtrack"
-                          : ""
-                      }}
+                         {{ item.lang }}
                     </div></NuxtLink
                   >
                 </div>
               </div>
+            </div>
+            <div class="overflow-auto text-white mt-5">
+              <v-pagination
+                :length="total"
+                :total-visible="5"
+                v-model="page"
+                @input="onPageChange"
+              ></v-pagination>
             </div>
           </div>
         </div>
@@ -57,36 +57,32 @@ export default {
   data() {
     return {
       movie_list: [],
+        page: 1,
+      total: 0,
     };
   },
   mounted() {
-    // console.log(this.$route.params);
-    this.getMovieByGenre(this.$route.params.categoryId);
+    this.getMovieByCategory(this.$route.params.categoryId);
   },
   methods: {
-    async getMovieByGenre(categoryId = 1) {
-      let payload = {
-        url: "https://service.server-cdn-streaming.com/api/web/movie-list",
-        method: "GET",
-        params: {
-          categoryId: categoryId,
-          offset: 0,
-          limit: 20,
-        },
-      };
-      await axios({
-        url: "https://api.xn--72czp5e5a8b.xyz/",
-        method: "POST",
-        data: payload,
-      })
-        .then((response) => {
-          this.movie_list = response.data.rows;
-          // console.log(response.data.rows);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+     async getMovieByCategory(category = 1, page = 1) {
+      let categoryId = category;
+      let moviePerPage = 20;
+      let offset = ((page - 1) * moviePerPage)+1;
+      let limit = moviePerPage;
+      let url = `${this.$config.public.api}/movie?offset=${offset}&limit=${limit}&categoryId=${categoryId}`;
+      const res = await axios.get(url);
+      this.movie_list = res.data.data;
+      this.total = res.data.total / moviePerPage + 1;
     },
+  },
+   watch: {
+    page:{
+      handler: function(val, oldVal) {
+         this.getMovieByCategory(val);
+       },
+       deep: true
+    }
   },
 };
 </script>

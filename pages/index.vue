@@ -26,42 +26,24 @@
                           :src="item.coverThumbPath"
                           :alt="item.name"
                           class="img-fluid"
+                          lazy="loaded"
                         />
                       </div>
                     </div>
                     <div class="movies-footer">
-                      {{
-                        item.soundThai && item.soundTrack
-                          ? "เสียงไทย + soundtrack"
-                          : item.soundThai
-                          ? "เสียงไทย"
-                          : item.soundTrack
-                          ? "soundtrack"
-                          : ""
-                      }}
+                      {{ item.lang }}
                     </div></NuxtLink
                   >
                 </div>
               </div>
             </div>
-            <div class="overflow-auto text-white">
-              <b-pagination
-                v-model="currentPage"
-                :total-rows="rows"
-                :per-page="perPage"
-                aria-controls="my-table"
-              ></b-pagination>
-
-              <p class="mt-3">Current Page: {{ currentPage }}</p>
-
-              <b-table
-                id="my-table"
-                :items="items"
-                :per-page="perPage"
-                :current-page="currentPage"
-                small
-              ></b-table>
-
+            <div class="overflow-auto text-white mt-5">
+              <v-pagination
+                :length="total"
+                :total-visible="5"
+                v-model="page"
+                @input="onPageChange"
+              ></v-pagination>
             </div>
           </div>
         </div>
@@ -78,53 +60,34 @@ export default {
   data() {
     return {
       movie_list: [],
-      perPage: 3,
-      currentPage: 1,
-      items: [
-        { id: 1, first_name: "Fred", last_name: "Flintstone" },
-        { id: 2, first_name: "Wilma", last_name: "Flintstone" },
-        { id: 3, first_name: "Barney", last_name: "Rubble" },
-        { id: 4, first_name: "Betty", last_name: "Rubble" },
-        { id: 5, first_name: "Pebbles", last_name: "Flintstone" },
-        { id: 6, first_name: "Bamm Bamm", last_name: "Rubble" },
-        { id: 7, first_name: "The Great", last_name: "Gazzoo" },
-        { id: 8, first_name: "Rockhead", last_name: "Slate" },
-        { id: 9, first_name: "Pearl", last_name: "Slaghoople" },
-      ],
+      page: 1,
+      total: 0,
     };
   },
+
   mounted() {
     this.getMovieHome(this.$route.query.page);
-    console.log(this.$route.query.page)
   },
   methods: {
-    getMovieHome(page = 1) {
-      let payload = {
-        url: "https://service.server-cdn-streaming.com/api/web/movie-list",
-        method: "GET",
-        params: {
-          genreId: "3",
-          offset: (page - 1) * 20,
-          limit: 20,
-        },
-      };
-      axios({
-        url: "https://api.xn--72czp5e5a8b.xyz/",
-        method: "POST",
-        data: payload,
-      })
-        .then((response) => {
-          this.movie_list = response.data.rows;
-          // console.log(response.data.rows);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    async getMovieHome(page = 1) {
+      let categoryId = "0";
+      let moviePerPage = 20;
+      let offset = (page - 1) * moviePerPage + 1;
+      let limit = moviePerPage;
+      let url = `${this.$config.public.api}/movie?offset=${offset}&limit=${limit}&categoryId=${categoryId}`;
+      const res = await axios.get(url);
+      this.movie_list = res.data.data;
+      this.total = res.data.total / moviePerPage + 1;
     },
   },
-  components: {
-    Page1,
-    Page2,
+
+  watch: {
+    page: {
+      handler: function (val, oldVal) {
+        this.getMovieHome(val);
+      },
+      deep: true,
+    },
   },
   computed: {
     rows() {
