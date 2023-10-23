@@ -94,27 +94,20 @@ export default {
   },
   data() {
     return {
-      title: ".....",
+      title: "",
       year: [],
       movieGenre: {},
       movieCategory: {},
+      title: this.$config.public.title,
     };
   },
   mounted() {
-    // loop create year 1978 to current year order desc
     for (let i = new Date().getFullYear(); i >= 1978; i--) {
       this.year.push(i);
     }
     this.getMovieCategory();
   },
   methods: {
-    async getMovieHome(page = 1) {
-      let categoryId = "3";
-      let offset = (page - 1) * 20;
-      let limit = 20;
-      // let url = `${config.api}/movie/home?categoryId=${categoryId}&offset=${offset}&limit=${limit}`;
-      // let res = await axios.get(url);
-    },
     async getMovieCategory() {
       let url = `${this.$config.public.api}/movieCategory`;
       let res = await axios.get(url);

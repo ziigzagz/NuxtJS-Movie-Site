@@ -1,7 +1,8 @@
 <template>
   <div>
     <Head>
-      <Title>{{ title }} 0000 </Title>
+      <Title>{{ title }}</Title>
+      <meta name="description" :content="description">
     </Head>
     <div class="content-wrapper">
       <div class="movies-wrapper">
@@ -136,7 +137,8 @@ export default {
       MoviePlayer: [],
       relatedMovies: [],
 lang: "",
-      title: `%s | ${this.$config.public.title}`,
+      title: `${this.$config.public.title}`,
+      description: "",
     };
   },
   async mounted() {
@@ -149,7 +151,10 @@ lang: "",
       let url = `${this.$config.public.api}/movieById/${MovieId}`;
       let res = await axios.get(url);
       this.MovieDetail = res.data?.data[0];
+      this.title = this.MovieDetail.name;
+      this.description = this.MovieDetail.description;
       console.log(this.MovieDetail);
+      console.log(this.description);
     },
     async getrelatedMovies(){
       let url = `${this.$config.public.api}/movieRandom`;

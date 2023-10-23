@@ -7,9 +7,9 @@
             <a href="/" class="header-brand"
               ><div class="header-icon">
                 <img
-                  src="https://master.server-cdn-streaming.com/api//uploads//web/21/20220602143723Zhtu.png"
-                  alt="ดูหนังออนไลน์ฟรี  2022 หนังใหม่ Netflix คมชัด HD 4K"
-                  class="img-fluid"
+                  :src="logoWeb"
+                  alt="ดูหนังออนไลน์ฟรี 2022 หนังใหม่ Netflix คมชัด HD 4K"
+                  class="img-fluid" v-if="logoWeb!=''"
                 /></div
             ></a>
           </div>
@@ -17,10 +17,7 @@
             <div class="row">
               <div class="col text-white">
                 <h1 style="font-family: Kanit, sans-serif; font-size: 16px">
-                  ดูหนัง.XYZ ดูหนังออนไลน์ 4K เต็มเรื่อง FullHD ดูหนังใหม่ชนโรง
-                  2022 Netflix หนังแอคชั่น หนังฝรั่ง หนังไทย ทีวีออนไลน์
-                  ซีรีย์ไทย ซีรีย์เกาหลี หนังผี หนังสยองขวัญ หนังจีน หนังแอคชั่น
-                  ดูหนนัง พากย์ไทย Master เต็มเรื่อง ดูฟรีไม่มีโฆษณากวนใจ
+               {{headerText}}
                 </h1>
               </div>
             </div>
@@ -48,7 +45,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      logoWeb: "",
+      headerText: "",
+    };
+  },
+  mounted() {
+    this.logoWeb = this.$config.public.logoWeb;
+    this.headerText = this.$config.public.headerText;
+  },
+};
 </script>
 
 <style lang="scss" scoped>

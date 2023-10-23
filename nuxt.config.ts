@@ -9,6 +9,12 @@ export default defineNuxtConfig({
     public: {
       title: process.env.title,
       api: process.env.api,
+      baseUrl: process.env.baseUrl,
+      logoWeb: process.env.logoWeb,
+      headerText: process.env.headerText,
+      footerText: process.env.footerText,
+      footerTextCopyRight: process.env.footerTextCopyRight,
+      description: process.env.description,
     },
     mode: "universal",
     target: "static",
@@ -21,8 +27,7 @@ export default defineNuxtConfig({
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
           name: "description",
-          content:
-            "ดูหนัง.XYZ ดูหนังออนไลน์ เต็มเรื่อง HD ดูหนังใหม่ชนโรง 2022 Netflix หนังแอคชั่น หนังฝรั่ง หนังไทย ทีวีออนไลน์ พากย์ไทย Master zoom ดูผ่านมือถือได้ทั้ง IOS และ Andriod นอกจากนี้รองรับ PC อีกด้วย หนัง4k ดูหนังฟรีผ่านมือถือ Tablet ไม่มีโฆษณา",
+          content: process.env.description ,
         },
       ],
       link: [
