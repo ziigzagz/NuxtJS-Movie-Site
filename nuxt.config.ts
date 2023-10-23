@@ -53,6 +53,7 @@ export default defineNuxtConfig({
     "bootstrap/dist/css/bootstrap.min.css",
     "bootstrap-vue/dist/bootstrap-vue.css",
     "assets/index.css",
+    
   ],
   plugins: [
     { src: '@/plugins/jquery.js', ssr: true, mode: 'server' },

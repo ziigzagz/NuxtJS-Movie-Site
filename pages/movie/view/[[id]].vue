@@ -57,15 +57,7 @@
             </div>
             <div class="row">
               <div class="col text-center text-white mt-3">
-                {{
-                  this.soundThai && this.soundTrack
-                    ? "เสียงไทย + soundtrack"
-                    : this.soundThai
-                    ? "เสียงไทย"
-                    : this.soundTrack
-                    ? "soundtrack"
-                    : ""
-                }}
+                {{ lang }}
               </div>
             </div>
             <div class="row mt-3">
@@ -119,15 +111,7 @@
                       </div>
                     </div>
                     <div class="movies-footer">
-                      {{
-                        soundThai && soundTrack
-                          ? "เสียงไทย + soundtrack"
-                          : soundThai
-                          ? "เสียงไทย"
-                          : soundTrack
-                          ? "soundtrack"
-                          : ""
-                      }}
+                      {{ lang }}
                     </div></NuxtLink
                   >
                 </div>
@@ -151,8 +135,7 @@ export default {
       MovieDetail: {},
       MoviePlayer: [],
       relatedMovies: [],
-      soundThai: "",
-      soundTrack: "",
+lang: "",
       title: `%s | ${this.$config.public.title}`,
     };
   },
