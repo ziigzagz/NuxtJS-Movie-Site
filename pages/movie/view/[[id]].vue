@@ -151,6 +151,8 @@ export default {
       MovieDetail: {},
       MoviePlayer: [],
       relatedMovies: [],
+      soundThai: "",
+      soundTrack: "",
       title: `%s | ${this.$config.public.title}`,
     };
   },

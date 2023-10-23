@@ -10,6 +10,7 @@ export default defineNuxtConfig({
       title: process.env.title,
       api: process.env.api,
     },
+    mode: "universal", target: "static"
    },
   app: {
     head: {
@@ -27,11 +28,7 @@ export default defineNuxtConfig({
         {
           src: "https://code.jquery.com/jquery-3.5.1.min.js",
           type: "text/javascript",
-        },        
-        // {
-        //   src: "_nuxt/node_modules/bootstrap-vue/dist/bootstrap-vue.js",
-        //   type: "text/javascript",
-        // },        
+        },            
       ],
     },
   },
@@ -58,9 +55,7 @@ export default defineNuxtConfig({
     "assets/index.css",
   ],
   plugins: [
-    // { src: '@/plugins/vue-bootstrap-typeahead.js', ssr: false },
     { src: '@/plugins/jquery.js', ssr: true, mode: 'server' },
     { src: '@/plugins/axios.js', ssr: true, mode: 'server' },
-    // { src: '@/plugins/test.js', ssr: false, mode: 'server' },
   ],
 });

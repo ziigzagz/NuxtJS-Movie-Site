@@ -30,15 +30,7 @@
                       </div>
                     </div>
                     <div class="movies-footer">
-                      {{
-                        item.soundThai && item.soundTrack
-                          ? "เสียงไทย + soundtrack"
-                          : item.soundThai
-                          ? "เสียงไทย"
-                          : item.soundTrack
-                          ? "soundtrack"
-                          : ""
-                      }}
+                        {{ item.lang }}
                     </div></NuxtLink>
                 </div>
               </div>
