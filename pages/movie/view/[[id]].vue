@@ -75,7 +75,7 @@
             <div class="row">
               <div class="col">
                 <button
-                  v-for="(item, index) in this.MoviePlayer"
+                  v-for="(item, index) in MoviePlayer"
                   :key="index"
                   class="btn btn-danger me-1 mt-1"
                 >

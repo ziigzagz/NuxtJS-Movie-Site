@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "nuxt": "^3.8.0",
+    "nuxt-simple-sitemap": "^3.4.0",
     "sass": "^1.69.4",
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.6",
