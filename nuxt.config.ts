@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+
 export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
@@ -20,7 +21,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel:"canonical", href:"https://ดูหนัง.xyz"}
+        { rel:"canonical", href: `${process.env.baseUrl}`}
       ],
       script: [
         {
@@ -34,6 +35,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+ 
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -57,8 +59,8 @@ export default defineNuxtConfig({
   ],
   plugins: [
     // { src: '@/plugins/vue-bootstrap-typeahead.js', ssr: false },
-    { src: '@/plugins/jquery.js', ssr: false, mode: 'server' },
-    { src: '@/plugins/axios.js', ssr: false, mode: 'server' },
+    { src: '@/plugins/jquery.js', ssr: true, mode: 'server' },
+    { src: '@/plugins/axios.js', ssr: true, mode: 'server' },
     // { src: '@/plugins/test.js', ssr: false, mode: 'server' },
   ],
 });
