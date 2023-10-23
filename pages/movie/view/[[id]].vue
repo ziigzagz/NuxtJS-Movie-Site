@@ -153,14 +153,13 @@ lang: "",
       this.MovieDetail = res.data?.data[0];
       this.title = this.MovieDetail.name;
       this.description = this.MovieDetail.description;
-      console.log(this.MovieDetail);
-      console.log(this.description);
+ 
     },
     async getrelatedMovies(){
       let url = `${this.$config.public.api}/movieRandom`;
       let res = await axios.get(url);
       this.relatedMovies = res.data?.data;
-      console.log(this.relatedMovies);
+     
     }
   },
 };

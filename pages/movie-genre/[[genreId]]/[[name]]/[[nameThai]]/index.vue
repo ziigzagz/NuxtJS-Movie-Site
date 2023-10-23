@@ -51,7 +51,7 @@ export default {
     };
   },
   mounted() {
-    // console.log(this.$route.params);
+
     this.getMovieByGenre(this.$route.params.genreId);
   },
   methods: {
@@ -72,7 +72,6 @@ export default {
       })
         .then((response) => {
           this.movie_list = response.data.rows;
-          // console.log(response.data.rows);
         })
         .catch((err) => {
           console.log(err);
