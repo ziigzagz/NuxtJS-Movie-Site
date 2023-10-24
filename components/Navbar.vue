@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .menu-bar {
   display: block;
   margin: 0 0 1rem;

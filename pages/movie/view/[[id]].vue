@@ -165,7 +165,7 @@ lang: "",
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .movies-content .movies-trailer {
   width: 100%;
   height: 100%;
