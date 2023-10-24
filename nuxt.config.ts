@@ -6,6 +6,17 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   runtimeConfig: {
+    sitemap: {
+      hostname: 'https://www.ljpc.nl',
+      gzip: true,
+      path: '/sitemap.xml',
+      routes: [],
+      defaults: {
+          changefreq: 'daily',
+          priority: 1,
+          lastmod: new Date()
+      }
+  },
     public: {
       title: process.env.title,
       api: process.env.api,
@@ -20,6 +31,7 @@ export default defineNuxtConfig({
     target: "static",
   },
   app: {
+    
     head: {
       titleTemplate: "", //
       meta: [
@@ -58,7 +70,9 @@ export default defineNuxtConfig({
       routes: ["/", "sitemap.xml"],
       ignore: ["/tak", "/konfiguration", "/checkout"],
     },
+    
   },
+  
   vite: {
     vue: {
       template: {
