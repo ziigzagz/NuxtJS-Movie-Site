@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
+  site: {
+    url: 'https://sofjewlw.ziigzagz.online/' // Replace with your actual site URL
+  },
   runtimeConfig: {
     sitemap: {
       hostname: 'https://www.ljpc.nl',
