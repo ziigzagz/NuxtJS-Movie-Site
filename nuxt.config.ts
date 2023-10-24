@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   site: {
-    url: 'https://sofjewlw.ziigzagz.online/' // Replace with your actual site URL
+    url: process.env.baseUrl // Replace with your actual site URL
   },
   runtimeConfig: {
     sitemap: {
